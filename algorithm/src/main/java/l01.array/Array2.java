@@ -1,6 +1,6 @@
 package l01.array;
 
-public class Array<E> {
+public class Array2<E> {
 
     private E[] data;
 
@@ -11,7 +11,7 @@ public class Array<E> {
      *
      * @param capacity
      */
-    public Array(int capacity) {
+    public Array2(int capacity) {
         data = (E[]) new Object[capacity];
         size = 0;
     }
@@ -19,7 +19,7 @@ public class Array<E> {
     /**
      * 无参数构造函数，默认数组的容量 capacity = 10
      */
-    public Array() {
+    public Array2() {
         this(10);
     }
 
@@ -73,7 +73,7 @@ public class Array<E> {
             throw new IllegalArgumentException("add  failed,Required index >= 0 && index <= size.");
         }
         if (size == data.length) {
-            throw new IllegalArgumentException("add is failed,Array is full.");
+            resize(2 * data.length);
         }
 
         for (int i = size - 1; i >= index; i--) {
@@ -81,6 +81,20 @@ public class Array<E> {
         }
         data[index] = e;
         size++;
+    }
+
+    /**
+     * 数组扩容
+     *
+     * @param newCapacity
+     */
+    private void resize(int newCapacity) {
+        E[] newData = (E[]) new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newData[i] = data[i];
+        }
+        //改变指向
+        data = newData;
     }
 
     /**
@@ -142,6 +156,11 @@ public class Array<E> {
         }
         size--;
         data[size] = null; //loitering objects != memory leak
+
+
+        if (size == data.length / 4 && data.length / 2 != 0) {
+            resize(data.length / 2);
+        }
         return ret;
     }
 
@@ -165,6 +184,7 @@ public class Array<E> {
 
     /**
      * 从数组中删除元素e
+     *
      * @param e
      */
     public void removeElement(E e) {

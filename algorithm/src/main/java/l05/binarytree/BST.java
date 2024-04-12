@@ -165,7 +165,7 @@ public class BST<E extends Comparable<E>> {
             successor.left = node.left;
             node.left = null;
             node.right = null;
-            size --;
+            size--;
             return successor;
         }
     }
@@ -182,6 +182,8 @@ public class BST<E extends Comparable<E>> {
         while (!stack.isEmpty()) {
             Node curNode = stack.pop();
             System.out.println(curNode.e);
+
+
             if (curNode.right != null) {
                 stack.push(curNode.right);
             }
@@ -210,6 +212,38 @@ public class BST<E extends Comparable<E>> {
                 queue.add(cur.right);
             }
         }
+    }
+
+    /**
+     * 换行层序打印
+     */
+    public void levelOrderWithWrap() {
+        if (root == null) {
+            return;
+        }
+        Node last = root;
+        Node nLast = root;
+        Queue<Node> queue = new LinkedList<>();
+
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            Node cur = queue.poll();
+            System.out.print(cur.e + " ");
+
+            if (cur.left != null) {
+                queue.add(cur.left);
+                nLast = cur.left;
+            }
+            if (cur.right != null) {
+                queue.add(cur.right);
+                nLast = cur.right;
+            }
+            if (cur == last) {
+                System.out.println();
+                last = nLast;
+            }
+        }
+
     }
 
     /**

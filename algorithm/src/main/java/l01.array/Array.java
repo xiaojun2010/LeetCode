@@ -1,5 +1,4 @@
 package l01.array;
-
 public class Array<E> {
 
     private E[] data;

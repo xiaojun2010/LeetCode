@@ -7,6 +7,23 @@ public class Main {
 
     public static void main(String[] args) {
         BST<Integer> bst = new BST<>();
+        int[] nums = {5, 3, 6, 8, 4, 2};
+        for (int num : nums)
+            bst.add(num);
+
+        /////////////////
+        //      5      //
+        //    /   \    //
+        //   3    6    //
+        //  / \    \   //
+        // 2  4     8  //
+        /////////////////
+        bst.levelOrderWithWrap();
+        System.out.println();
+    }
+
+    public static void main3(String[] args) {
+        BST<Integer> bst = new BST<>();
         Random random = new Random();
         int n = 1000;
         for (int i = 0; i < n; i++) {
